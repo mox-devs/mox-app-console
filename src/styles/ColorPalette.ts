@@ -37,7 +37,7 @@ export const Palette: Color = {
   primary: '#002E61',
   secondary: '#536DFE',
   success: '#00BFA6',
-  warning: '#F9A826',
+  warning: '#F9A826'
 }
 
 export default Palette

@@ -11,11 +11,11 @@ const rotate = keyframes`
   }
 `
 const Div = styled.div`
-  color: official;
-  display: inline-block;
   position: relative;
+  display: inline-block;
   width: 80px;
   height: 80px;
+  color: official;
 
   & div {
     transform-origin: 40px 40px;
@@ -23,13 +23,13 @@ const Div = styled.div`
   }
   & div:after {
     content: ' ';
-    display: block;
     position: absolute;
-    top: 3px;
     left: 37px;
+    top: 3px;
+    display: block;
+    border-radius: 20%;
     width: 6px;
     height: 18px;
-    border-radius: 20%;
     background: ${Palette.primary};
   }
   & div:nth-child(1) {

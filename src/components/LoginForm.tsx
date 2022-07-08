@@ -26,13 +26,13 @@ type LoginData = {
 }
 // ---------------------- Styles ----------------------
 const StyledForm = styled.form`
-  width: 400px;
-  background: ${Palette.light};
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   border-radius: 20px;
+  width: 400px;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
+  background: ${Palette.light};
 
   @media (max-width: 744px) {
     width: 330px;

@@ -12,22 +12,22 @@ interface StyleProps {
 }
 
 export const StyledButton = styled.button<StyleProps>`
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  padding: 16px 35px;
+  width: 100%;
+  box-shadow: 0px 7px 7px rgba(0, 0, 0, 0.25);
+  font-weight: bold;
+  font-size: 1em;
+  font-size: 18px;
+  color: ${Palette.light};
   background: ${props =>
     props.variant === VariantType.primary
       ? Palette.secondary
       : Palette.primary};
   background: ${props => props.disabled && Palette.gray};
-  border-radius: 8px;
-  font-size: 1em;
-  padding: 16px 35px;
-  outline: none;
-  border: none;
-  width: 100%;
-  font-weight: bold;
-  font-size: 18px;
   cursor: pointer;
-  color: ${Palette.light};
-  box-shadow: 0px 7px 7px rgba(0, 0, 0, 0.25);
 
   &:hover {
     opacity: 0.8;

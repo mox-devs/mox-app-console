@@ -16,13 +16,13 @@ interface Iprops {
 
 const StyledForm = styled.form`
   z-index: 10;
-  width: 500px;
-  background: ${Palette.light};
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   border-radius: 20px;
+  width: 500px;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
+  background: ${Palette.light};
   animation: ${Anvil} 1s ease forwards;
 
   @media (max-width: 744px) {
@@ -43,29 +43,29 @@ const ButtonContainer = styled.div`
   margin: 30px 30px;
 `
 const Div = styled.div`
+  position: fixed;
+  top: 0px;
+  z-index: 2;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   margin: auto 0;
   width: 100vw;
   min-height: 100vh;
   background: rgba(0, 0, 0, 0.418);
-  position: fixed;
-  top: 0px;
-  z-index: 2;
 `
 
 const CloseButton = styled.div`
   display: flex;
   justify-content: flex-end;
-  width: calc(100% - 30px);
   margin: 20px;
+  width: calc(100% - 30px);
 
   & button {
     border: none;
     padding: 5px;
-    background: none;
     font-size: 16px;
+    background: none;
     cursor: pointer;
   }
 `
