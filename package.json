@@ -15,13 +15,17 @@
     "test-all": "npm run lint && npm run lint:styles && npm run lint:types && npm run build"
   },
   "dependencies": {
+    "amazon-cognito-identity-js": "^5.2.9",
     "axios": "^0.27.2",
     "formik": "^2.2.9",
     "next": "12.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.4.0",
     "react-is": "^18.2.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "sweetalert2": "^11.4.20",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@stylelint/postcss-css-in-js": "^0.38.0",
