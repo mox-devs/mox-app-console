@@ -20,10 +20,10 @@ npm run lint ||
 )
 
 # Check Stylelint Standards
-npm run fix:styles ||
+npm run lint:styles ||
 (
         echo '😤🏀👋😤 Get that weak s**t out of here! 😤🏀👋😤 
-                Stylelint Check Failed. Make the required changes listed above, add changes and try to commit again.'
+                Stylelint Check Failed. Please run npm fix:styles.'
         false; 
 )
 
