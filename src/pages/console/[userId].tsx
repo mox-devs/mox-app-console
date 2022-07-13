@@ -1,22 +1,23 @@
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import HelloWorld from '../components/HelloWorld'
-import Loader from '../components/Loader'
-import { useUser } from '../context/authContext'
-import SideBarLayout from '../Layouts/SideBarLayout'
-import { CenterWrapper } from './login'
+import Loader from '../../components/Loader'
+import { useUser } from '../../context/authContext'
+import SideBarLayout from '../../Layouts/SideBarLayout'
+import { CenterWrapper } from '../login'
 
-const Home: NextPage = () => {
+const UserId: NextPage = () => {
+  const router = useRouter()
+  const { userId } = router.query
+  // ruta es /console/userId ejemplo usuario de id 1  /console/1
+
   const [loading, setLoading] = useState(true)
   const {
     user: { isUserValid }
   } = useUser()
 
-  const router = useRouter()
-
   useEffect(() => {
-    if (isUserValid() === false) {
+    if (!isUserValid()) {
       router.push('/login')
     } else {
       setLoading(false)
@@ -31,9 +32,9 @@ const Home: NextPage = () => {
     )
   return (
     <SideBarLayout>
-      <HelloWorld />
+      <div>Usuario {userId}</div>
     </SideBarLayout>
   )
 }
 
-export default Home
+export default UserId

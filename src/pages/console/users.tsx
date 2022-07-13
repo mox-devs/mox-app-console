@@ -15,11 +15,11 @@ const Users: NextPage = () => {
   const router = useRouter()
 
   useEffect(() => {
-    setLoading(true)
     if (!isUserValid()) {
       router.push('/login')
+    } else {
+      setLoading(false)
     }
-    setLoading(false)
   }, [])
 
   if (loading)
