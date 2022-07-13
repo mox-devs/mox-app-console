@@ -4,11 +4,11 @@ import { ErrorMessage, Field, Formik } from 'formik'
 import Image from 'next/image'
 import * as Yup from 'yup'
 import { useRouter } from 'next/router'
-import {
-  CognitoUserPool,
-  CognitoUser,
-  AuthenticationDetails
-} from 'amazon-cognito-identity-js'
+// import {
+//   CognitoUserPool,
+//   CognitoUser,
+//   AuthenticationDetails
+// } from 'amazon-cognito-identity-js'
 import Swal from 'sweetalert2'
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
 import { StyledButton, VariantType } from '../styles/ButtonStyles'
@@ -85,84 +85,93 @@ export const LoginForm: React.FC = () => {
   const onSubmit = (values: LoginData) => {
     setLoading(true)
     setOpenModal(false)
-
-    const poolData = {
-      UserPoolId: process.env.USER_POOL_ID || 'us-east-1_4KAiufRxD',
-      ClientId: process.env.CLIENT_ID || '61uo42kihg2vp5ce1v0qfg5u94'
-    }
-
-    const authenticationDetails = new AuthenticationDetails({
-      Username: values.user,
-      Password: values.password
+    console.log(values)
+    user.logInHandler({
+      id: 123,
+      token: '123123'
     })
+    router.push('/home')
+    setLoading(false)
 
-    const cognitoUser = new CognitoUser({
-      Username: values.user,
-      Pool: new CognitoUserPool(poolData)
-    })
+    // const poolData = {
+    //   UserPoolId: process.env.USER_POOL_ID || 'us-east-1_4KAiufRxD',
+    //   ClientId: process.env.CLIENT_ID || '61uo42kihg2vp5ce1v0qfg5u94'
+    // }
 
-    cognitoUser.authenticateUser(authenticationDetails, {
-      onSuccess(result) {
-        const accessToken = result.getAccessToken().getJwtToken()
-        user.logInHandler(accessToken, {
-          companyID: 1005,
-          companyName: 'IZA BC',
-          email: '',
-          user: values.user
-        })
-        router.push('/dashboard')
-        setLoading(false)
-      },
+    // const authenticationDetails = new AuthenticationDetails({
+    //   Username: values.user,
+    //   Password: values.password
+    // })
 
-      onFailure(err) {
-        setLoading(false)
-        Swal.fire({
-          icon: 'error',
-          title: 'Uy, algo salio mal',
-          text: 'El usuario o la contraseña son incorrectos, por favor verifique',
-          footer: err
-        })
-      },
+    // const cognitoUser = new CognitoUser({
+    //   Username: values.user,
+    //   Pool: new CognitoUserPool(poolData)
+    // })
 
-      newPasswordRequired(userAttributes) {
-        delete userAttributes.email_verified
+    // cognitoUser.authenticateUser(authenticationDetails, {
+    //   onSuccess(result) {
+    //     const accessToken = result.getAccessToken().getJwtToken()
+    //     user.logInHandler(accessToken, {
+    //       companyID: 1005,
+    //       companyName: 'IZA BC',
+    //       email: '',
+    //       user: values.user
+    //     })
+    //     router.push('/dashboard')
+    //     setLoading(false)
+    //   },
 
-        if (!values.newPassword) setOpenModal(true)
-        else
-          cognitoUser.completeNewPasswordChallenge(
-            values.newPassword,
-            { name: values.user },
-            {
-              onSuccess(result) {
-                const accessToken = result.getAccessToken().getJwtToken()
-                user.logInHandler(accessToken, {
-                  companyID: 1005,
-                  companyName: 'IZA BC',
-                  email: '',
-                  user: values.user
-                })
-                router.push('/dashboard')
-              },
+    //   onFailure(err) {
+    //     setLoading(false)
+    //     Swal.fire({
+    //       icon: 'error',
+    //       title: 'Uy, algo salio mal',
+    //       text: 'El usuario o la contraseña son incorrectos, por favor verifique',
+    //       footer: err
+    //     })
+    //   },
 
-              onFailure(err) {
-                setOpenModal(false)
-                // eslint-disable-next-line no-param-reassign
-                values.newPassword = ''
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Uy, algo salio mal',
-                  text: 'Por favor comuníquese con soporte',
-                  footer: err
-                })
-              }
-            }
-          )
-      }
-    })
+    //   newPasswordRequired(userAttributes) {
+    //     delete userAttributes.email_verified
+
+    //     if (!values.newPassword) setOpenModal(true)
+    //     else
+    //       cognitoUser.completeNewPasswordChallenge(
+    //         values.newPassword,
+    //         { name: values.user },
+    //         {
+    //           onSuccess(result) {
+    //             const accessToken = result.getAccessToken().getJwtToken()
+    //             user.logInHandler(accessToken, {
+    //               companyID: 1005,
+    //               companyName: 'IZA BC',
+    //               email: '',
+    //               user: values.user
+    //             })
+    //             router.push('/dashboard')
+    //           },
+
+    //           onFailure(err) {
+    //             setOpenModal(false)
+    //             // eslint-disable-next-line no-param-reassign
+    //             values.newPassword = ''
+    //             Swal.fire({
+    //               icon: 'error',
+    //               title: 'Uy, algo salio mal',
+    //               text: 'Por favor comuníquese con soporte',
+    //               footer: err
+    //             })
+    //           }
+    //         }
+    //       )
+    //   }
+    // })
   }
 
   const validationSchema = Yup.object({
-    user: Yup.string().required('Ingrese su nombre de usuario'),
+    user: Yup.string()
+      .required('Ingrese su nombre de usuario')
+      .email('Ingreses un email valido'),
     password: Yup.string().required('Ingrese contraseña')
   })
 

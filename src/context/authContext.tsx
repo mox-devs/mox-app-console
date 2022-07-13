@@ -3,29 +3,20 @@ import { UserInfo } from '../types/userInfo.types'
 
 interface Iprops {
   children: React.ReactNode
-  loggedUser:
-    | undefined
-    | {
-        userInfo: UserInfo | undefined
-        token: string
-      }
 }
 
 interface IContext {
-  isUserValid: () => void
+  isUserValid: () => boolean
   getUserData: () => void
   logOutHandler: () => void
-  logInHandler: (token: string, userInfo: UserInfo) => null | void
+  logInHandler: (userInfo: UserInfo) => null | void
 }
 
 const AuthContext = createContext<IContext>({} as IContext)
 
-export const AuthProvider = ({ children, loggedUser }: Iprops) => {
-  const [userValidated, setUserValidated] = useState(!!loggedUser)
-  const [token, setToken] = useState<string | undefined>(loggedUser?.token)
-  const [userInfo, setUserInfo] = useState<UserInfo | undefined>(
-    loggedUser?.userInfo
-  )
+export const AuthProvider = ({ children }: Iprops) => {
+  const [, setUserValidated] = useState<boolean | undefined>()
+  const [userInfo, setUserInfo] = useState<UserInfo>()
 
   const getUserData = () => {
     return {
@@ -33,22 +24,23 @@ export const AuthProvider = ({ children, loggedUser }: Iprops) => {
     }
   }
 
-  const isUserValid = () => {
-    return userValidated && token
+  const isUserValid: () => boolean = () => {
+    const datos = JSON.parse(localStorage.getItem('userData') as string)
+    // TO DO verificar que token sea valido en cognito y su es valido cambiar a true UserValidated
+    if (datos) return true
+    return false
   }
 
-  const logInHandler = (token: string, userInfo: UserInfo) => {
-    if (!token) return null
-    localStorage.setItem('userData', JSON.stringify({ userInfo, token }))
+  const logInHandler = (userInfo: UserInfo) => {
+    if (!userInfo) return null
+    localStorage.setItem('userData', JSON.stringify(userInfo))
     setUserValidated(true)
-    setToken(token)
     setUserInfo(userInfo)
   }
 
   const logOutHandler = () => {
     localStorage.removeItem('userData')
     setUserValidated(false)
-    setToken(undefined)
     setUserInfo(undefined)
   }
 
