@@ -21,7 +21,7 @@ interface IProps {
   }
 }
 
-const SidebarLink = styled.a`
+const SidebarLink = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,6 +29,7 @@ const SidebarLink = styled.a`
   font-size: 18px;
   text-decoration: none;
   color: #e1e9fc;
+  transition: 300ms;
 
   &:hover {
     border-left: 4px solid ${Palette.alt_5};
@@ -47,6 +48,7 @@ const DropdownLink = styled.a`
   text-decoration: none;
   color: #f5f5f5;
   background: #414757;
+  transition: 300ms;
 
   &:hover {
     background: #632ce4;
@@ -90,10 +92,8 @@ const SubMenu: React.FC<IProps> = ({ item }) => {
   return (
     <ActiveLink activeClassName="active" href={item.path}>
       <SidebarLink onClick={item.subNav && showSubNav}>
-        <a>
-          {item.icon}
-          <SidebarLabel>{item.title}</SidebarLabel>
-        </a>
+        {item.icon}
+        <SidebarLabel>{item.title}</SidebarLabel>
       </SidebarLink>
     </ActiveLink>
   )

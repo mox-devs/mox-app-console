@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Loader from '../../components/Loader'
+import OnBoard from '../../components/OnBoarding'
 import { useUser } from '../../context/authContext'
 import SideBarLayout from '../../Layouts/SideBarLayout'
 import { CenterWrapper } from '../login'
@@ -15,11 +16,11 @@ const OnBoarding: NextPage = () => {
   const router = useRouter()
 
   useEffect(() => {
-    setLoading(true)
     if (!isUserValid()) {
       router.push('/login')
+    } else {
+      setLoading(false)
     }
-    setLoading(false)
   }, [])
 
   if (loading)
@@ -30,7 +31,7 @@ const OnBoarding: NextPage = () => {
     )
   return (
     <SideBarLayout>
-      <p>OnBoarding</p>
+      <OnBoard />
     </SideBarLayout>
   )
 }
