@@ -5,6 +5,7 @@ import Loader from '../../components/Loader'
 import { useUser } from '../../context/authContext'
 import SideBarLayout from '../../Layouts/SideBarLayout'
 import { CenterWrapper } from '../login'
+import UserList from '../../components/UserList'
 
 const Users: NextPage = () => {
   const [loading, setLoading] = useState(true)
@@ -30,7 +31,7 @@ const Users: NextPage = () => {
     )
   return (
     <SideBarLayout>
-      <p>Users</p>
+      <UserList />
     </SideBarLayout>
   )
 }
