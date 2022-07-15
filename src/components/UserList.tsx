@@ -96,16 +96,12 @@ const List = styled.table`
   }
 `
 
-const StyledForm = styled.div`
+const StyledForm = styled(Form)`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-
-  form {
-    display: flex;
-    flex-direction: row;
-  }
+  width: 100%;
 `
 
 const Input = styled(Field)`
@@ -253,32 +249,30 @@ const UserList: React.FC = () => {
   return (
     <Container>
       <Card>
-        <StyledForm>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={async (values, { setSubmitting, resetForm }) =>
-              handleSubmit(values, { setSubmitting, resetForm })
-            }
-          >
-            {({ values, handleChange }) => (
-              <Form style={{ width: '100%' }}>
-                <Input
-                  name="search"
-                  value={values.search}
-                  onChange={handleChange}
-                  placeholder="Busca un usuario"
-                />
-                <Button type="submit">Buscar</Button>
-                {isSearching && (
-                  <Button className="danger" onClick={handleClear}>
-                    Limpiar busqueda
-                  </Button>
-                )}
-              </Form>
-            )}
-          </Formik>
-        </StyledForm>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={async (values, { setSubmitting, resetForm }) =>
+            handleSubmit(values, { setSubmitting, resetForm })
+          }
+        >
+          {({ values, handleChange }) => (
+            <StyledForm>
+              <Input
+                name="search"
+                value={values.search}
+                onChange={handleChange}
+                placeholder="Busca un usuario"
+              />
+              <Button type="submit">Buscar</Button>
+              {isSearching && (
+                <Button className="danger" onClick={handleClear}>
+                  Limpiar busqueda
+                </Button>
+              )}
+            </StyledForm>
+          )}
+        </Formik>
         <List>
           <thead>
             <tr>
