@@ -304,11 +304,7 @@ const UserList: React.FC = () => {
               <th className="no-sort">Info</th>
             </tr>
           </thead>
-          <tbody
-            onClick={() => {
-              console.log(searchResult)
-            }}
-          >
+          <tbody>
             {isSearching
               ? searchResult.map(user => <UserRow key={user.id} user={user} />)
               : userList.map(user => <UserRow key={user.id} user={user} />)}
