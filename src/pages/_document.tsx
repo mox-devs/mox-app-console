@@ -26,7 +26,6 @@ export default class MyDocument extends Document {
       return {
         ...initialProps,
         styles: [
-          // eslint-disable-next-line react/react-in-jsx-scope
           <Fragment key={0}>
             {initialProps.styles}
             {sheet.getStyleElement()}

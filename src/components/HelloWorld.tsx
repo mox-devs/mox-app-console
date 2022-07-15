@@ -4,8 +4,8 @@ import styled from 'styled-components'
 const Div = styled.div`
   color: blue;
 `
-const Home: React.FC = () => {
+const HelloWorld: React.FC = () => {
   return <Div> Hola mundo </Div>
 }
 
-export default Home
+export default HelloWorld

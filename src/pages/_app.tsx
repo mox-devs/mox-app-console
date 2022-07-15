@@ -5,7 +5,7 @@ import { AuthProvider } from '../context/authContext'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <AuthProvider loggedUser={undefined}>
+    <AuthProvider>
       <GlobalStyle />
       <Component {...pageProps} />
     </AuthProvider>
