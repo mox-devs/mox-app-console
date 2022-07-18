@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Palette from '../styles/ColorPalette'
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
-import Link from 'next/link'
-import { BsFillInfoCircleFill } from 'react-icons/bs'
+import UserRow from './UserRow'
 
 // ----- Types -----
-type UserInfo = {
+export type UserListInfo = {
   id: string
   name: string
   rfc: string
@@ -18,8 +17,13 @@ type Values = {
   search: string
 }
 
+type formikFunctions = {
+  setSubmitting: (boolean: boolean) => void
+  resetForm: () => void
+}
+
 // ----- Mock Info -----
-const users: UserInfo[] = [
+const users: UserListInfo[] = [
   { id: '1', name: 'John Doe', rfc: 'JODO167846NL', entidad: 'Uber' },
   { id: '2', name: 'Xavier Doe', rfc: 'XADO167846NL', entidad: 'Deel' },
   { id: '3', name: 'Mike Hill', rfc: 'MIHIO167846NL', entidad: 'Uber' },
@@ -143,30 +147,9 @@ const Button = styled.button`
 
 // ----- Component Logic -----
 
-interface IProps {
-  user: UserInfo
-}
-
-const UserRow: React.FC<IProps> = ({ user }) => {
-  return (
-    <tr>
-      <td>{user.name}</td>
-      <td>{user.rfc}</td>
-      <td>{user.entidad}</td>
-      <td>
-        <Link href={`/console/${user.id}`}>
-          <a>
-            <BsFillInfoCircleFill />
-          </a>
-        </Link>
-      </td>
-    </tr>
-  )
-}
-
 const UserList: React.FC = () => {
-  const [userList, setUserList] = useState<UserInfo[]>(users)
-  const [searchResult, setSearchResult] = useState<UserInfo[]>([])
+  const [userList, setUserList] = useState<UserListInfo[]>([])
+  const [searchResult, setSearchResult] = useState<UserListInfo[]>([])
   const [isSearching, setIsSearching] = useState<boolean>(false)
   const [sorted, setSorted] = useState({
     name: false,
@@ -175,11 +158,15 @@ const UserList: React.FC = () => {
     entityArrow: '▲'
   })
 
+  useEffect(() => {
+    setUserList(users)
+  })
+
   const initialValues: Values = { search: '' }
 
   // ----- Sorting Functions -----
 
-  const sortByName = (userArray: UserInfo[]) => {
+  const sortByName = (userArray: UserListInfo[]) => {
     if (sorted.nameArrow === '▲') {
       setSorted({ name: true, nameArrow: '▼', entity: false, entityArrow: '▲' })
       return userArray.sort((a, b) => {
@@ -193,7 +180,7 @@ const UserList: React.FC = () => {
     }
   }
 
-  const sortByEntity = async (userArray: UserInfo[]) => {
+  const sortByEntity = async (userArray: UserListInfo[]) => {
     if (sorted.entityArrow === '▲') {
       setSorted({ name: false, nameArrow: '▲', entity: true, entityArrow: '▼' })
       return userArray.sort((a, b) => {
@@ -213,11 +200,6 @@ const UserList: React.FC = () => {
     setSorted({ name: false, nameArrow: '▲', entity: false, entityArrow: '▲' })
     setSearchResult([])
     setIsSearching(false)
-  }
-
-  type formikFunctions = {
-    setSubmitting: (boolean: boolean) => void
-    resetForm: () => void
   }
 
   const handleSubmit = async (
