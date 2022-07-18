@@ -8,10 +8,10 @@
     "start": "next start",
     "prepare": "husky install",
     "lint": "next lint",
-    "lint:styles": "stylelint './src/**/*.{ts,tsx}'",
+    "lint:styles": "stylelint ./src/**/*.{ts,tsx}",
     "fix:styles": "stylelint './src/**/*.{ts,tsx}' --fix",
     "lint:types": "tsc --pretty --noEmit",
-    "format": "prettier --write './src/**/*.{ts,tsx}'",
+    "format": "prettier --write ./src/**/*.{ts,tsx}",
     "test-all": "npm run lint && npm run lint:styles && npm run lint:types && npm run build"
   },
   "dependencies": {
