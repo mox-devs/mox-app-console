@@ -16,17 +16,17 @@ type RfcData = {
 }
 
 interface Iprops {
-  createPassword: React.Dispatch<React.SetStateAction<boolean>>
+  setStep: React.Dispatch<React.SetStateAction<number>>
 }
 
 // ----- Styles -----
-const StyledForm = styled(Form)`
+export const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 20px;
   width: 400px;
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
   background: ${Palette.light};
 
   @media (max-width: 744px) {
@@ -56,12 +56,12 @@ const CheckboxLabel = styled.label`
 `
 
 const ButtonContainer = styled.div`
-  margin: 50px 30px;
+  margin: 10px auto 20px;
 `
 
 // ----- Component Logic -----
 
-const RFC: React.FC<Iprops> = ({ createPassword }) => {
+const RFC: React.FC<Iprops> = ({ setStep }) => {
   const [loading, setLoading] = useState(false)
 
   const initialValues: RfcData = {
@@ -72,11 +72,11 @@ const RFC: React.FC<Iprops> = ({ createPassword }) => {
   const handleSubmit = (values: RfcData) => {
     setLoading(true)
     if (values.rfc === '1234') {
-      createPassword(true)
+      setStep(2)
     } else {
       Swal.fire({
         icon: 'warning',
-        title: 'Clave RFC no encontrada',
+        title: 'Su RFC no se encuentra asociada a esta empresa',
         text: 'Disculpe las molestias.'
       })
     }
@@ -128,7 +128,7 @@ const RFC: React.FC<Iprops> = ({ createPassword }) => {
                   type="checkbox"
                   onChange={handleChange}
                 />
-                Acepto los <strong>terminos y condiciones</strong>
+                Acepto los <strong>términos y condiciones</strong>
               </CheckboxLabel>
               <ButtonContainer>
                 <StyledButton type="submit" variant={VariantType.primary}>
