@@ -9,7 +9,7 @@ import { useRouter } from 'next/router'
 //   CognitoUser,
 //   AuthenticationDetails
 // } from 'amazon-cognito-identity-js'
-import Swal from 'sweetalert2'
+// import Swal from 'sweetalert2'
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
 import { StyledButton, VariantType } from '../styles/ButtonStyles'
 import { Palette } from '../styles/ColorPalette'
@@ -226,12 +226,13 @@ export const LoginForm: React.FC = () => {
               </ErrorContainer>
 
               <P
-                onClick={() =>
-                  Swal.fire({
+                onClick={
+                  () => router.push('/password-recovery')
+                  /* Swal.fire({
                     icon: 'info',
                     title: 'Olvidaste tu contraseña',
                     text: 'Por favor comuníquese con soporte para recuperar la contraseña'
-                  })
+                  }) */
                 }
               >
                 Olvide mi contraseña
