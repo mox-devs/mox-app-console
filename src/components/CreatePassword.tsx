@@ -1,34 +1,22 @@
 import React, { useState } from 'react'
-import { Formik, Form, ErrorMessage, Field } from 'formik'
+import { Formik, ErrorMessage, Field } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
-import Palette from '../styles/ColorPalette'
 import Image from 'next/image'
 import { ErrorContainer, PasswordInput } from '../styles/FormStyles'
 import { StyledButton, VariantType } from '../styles/ButtonStyles'
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
+import { StyledForm } from './RFC'
 
 // ----- Types ------
 type Password = {
   password: string
   confirmPassword: string
 }
-
+interface Iprops {
+  setStep: React.Dispatch<React.SetStateAction<number>>
+}
 // ----- Styles -----
-
-const StyledForm = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 20px;
-  width: 400px;
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
-  background: ${Palette.light};
-
-  @media (max-width: 744px) {
-    width: 330px;
-  }
-`
 
 const ImgContainer = styled.div`
   margin: 30px;
@@ -46,7 +34,7 @@ const ButtonContainer = styled.div`
 
 // ----- Component Logic -----
 
-const CreatePassword: React.FC = () => {
+const CreatePassword: React.FC<Iprops> = ({ setStep }) => {
   const [showPass, setShowPass] = useState({
     pass: false,
     confirmPass: false
@@ -58,6 +46,7 @@ const CreatePassword: React.FC = () => {
   }
 
   const handleSubmit = (values: Password) => {
+    setStep(3)
     console.log(
       `Contraseña: ${values.password}, confirmación: ${values.confirmPassword}`
     )
