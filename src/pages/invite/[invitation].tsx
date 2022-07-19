@@ -5,6 +5,7 @@ import RFC from '../../components/RFC'
 import ServiceEntity from '../../components/ServiceEntity'
 import CreatePassword from '../../components/CreatePassword'
 import ExternalCredentials from '../../components/ExternalCredentials'
+import TermsConditions from '../../components/TermsConditions'
 
 export interface entityTypes {
   name: string
@@ -13,7 +14,7 @@ export interface entityTypes {
 }
 
 const Invitation = () => {
-  const [step, setStep] = useState(4)
+  const [step, setStep] = useState(5)
   const [entity, setEntity] = useState<entityTypes>({
     name: 'Uber',
     id: '1',
@@ -30,6 +31,7 @@ const Invitation = () => {
       {step === 2 && <CreatePassword setStep={setStep} />}
       {step === 3 && <ServiceEntity setStep={setStep} setEntity={setEntity} />}
       {step === 4 && <ExternalCredentials setStep={setStep} entity={entity} />}
+      {step === 5 && <TermsConditions />}
     </CenterWrapper>
   )
 }
