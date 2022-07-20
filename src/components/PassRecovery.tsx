@@ -47,8 +47,8 @@ const PassRecovery: React.FC<IProps> = ({ handleState, handleEmail }) => {
     if (values.email === 'notfound@email.com') {
       Swal.fire({
         icon: 'error',
-        title: 'Error',
-        text: 'Por favor intente nuevamente'
+        title: 'Ha ocurrido un error.',
+        text: 'Por favor, revise la dirección de correo y vuelva a intentarlo.'
       })
     } else {
       handleEmail(values.email)

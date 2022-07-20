@@ -13,6 +13,7 @@ import {
   StyledForm,
   TextContainer
 } from '../styles/FormLayoutStyles'
+import Swal from 'sweetalert2'
 
 // ----- Types -----
 
@@ -34,23 +35,31 @@ const CreateNewPass: React.FC = () => {
 
   const validationSchema = Yup.object({
     password: Yup.string()
-      .min(10, 'Contraseña muy corta')
-      .matches(/[A-Z]/, 'Debe contener por lo menos 1 mayúscula')
-      .matches(/[a-z]/, 'Debe contener por lo menos 1 minúscula')
-      .matches(/[0-9]/, 'Debe contener por lo menos 1 dígito')
+      .min(10, 'Contraseña muy corta.')
+      .matches(/[A-Z]/, 'Debe contener por lo menos 1 mayúscula.')
+      .matches(/[a-z]/, 'Debe contener por lo menos 1 minúscula.')
+      .matches(/[0-9]/, 'Debe contener por lo menos 1 dígito.')
       .matches(
         /[!@#$%^&*()\-_=+{};:,<.>]/,
-        'Debe contener por lo menos 1 carácter especial'
+        'Debe contener por lo menos 1 carácter especial.'
       )
-      .required('Ingrese su nueva contraseña'),
+      .required('Ingrese su nueva contraseña.'),
     confirmPass: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Las contraseñas no coinciden')
-      .required('Confirme su contraseña')
+      .oneOf([Yup.ref('password'), null], 'Las contraseñas no coinciden.')
+      .required('Confirme su contraseña.')
   })
 
   const onSubmit = (values: Password) => {
     console.log(values.password)
-    router.push('/login')
+    Swal.fire({
+      icon: 'success',
+      title: 'Contraseña creada con éxito.',
+      text: 'Será redireccionado en breve.'
+    })
+    setTimeout(() => {
+      Swal.close()
+      router.push('/login')
+    }, 3000)
   }
 
   return (

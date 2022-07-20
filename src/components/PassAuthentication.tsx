@@ -1,6 +1,6 @@
 import { Formik } from 'formik'
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { StyledButton, VariantType } from '../styles/ButtonStyles'
 import {
   ButtonContainer,
@@ -14,6 +14,8 @@ import * as Yup from 'yup'
 import AutoSubmitToken from './AutoSubmitToken'
 import Swal from 'sweetalert2'
 import { BsArrowLeft } from 'react-icons/bs'
+import styled from 'styled-components'
+import Loader from './Loader'
 
 // ----- Types -----
 
@@ -27,6 +29,13 @@ interface IProps {
   email: string
 }
 
+// ----- Styles -----
+
+const ButtonAlign = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 // ----- Component Logic -----
 
 const PassAuthentication: React.FC<IProps> = ({
@@ -34,6 +43,8 @@ const PassAuthentication: React.FC<IProps> = ({
   handleBack,
   email
 }) => {
+  const [loading, setLoading] = useState(false)
+
   const initialValues: Auth = {
     auth: ''
   }
@@ -43,15 +54,19 @@ const PassAuthentication: React.FC<IProps> = ({
   })
 
   const onSubmit = (values: Auth) => {
-    if (values.auth === '123456') {
-      handleState(true)
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Token no válido',
-        text: 'Por favor ingrese el token nuevamente'
-      })
-    }
+    setLoading(true)
+    setTimeout(() => {
+      if (values.auth !== '123456') {
+        handleState(true)
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Token no válido.',
+          text: 'Por favor, ingrese el token nuevamente.'
+        })
+        setLoading(false)
+      }
+    }, 1000)
   }
 
   return (
@@ -77,16 +92,23 @@ const PassAuthentication: React.FC<IProps> = ({
               revise su bandeja de entrada.
             </p>
           </TextContainer>
-          <Label htmlFor="auth">Ingrese su codigo de recuperación</Label>
-          <InputText
-            id="auth"
-            name="auth"
-            maxLength="6"
-            autocomplete="off"
-            value={values.auth}
-            onChange={handleChange}
-          />
-          <AutoSubmitToken />
+          {loading ? (
+            <Loader />
+          ) : (
+            <>
+              <Label htmlFor="auth">Ingrese su codigo de recuperación</Label>
+              <InputText
+                id="auth"
+                name="auth"
+                maxLength="6"
+                autocomplete="off"
+                placeholder="Codigo de 6 digitos"
+                value={values.auth}
+                onChange={handleChange}
+              />
+              <AutoSubmitToken />
+            </>
+          )}
           <ButtonContainer>
             <StyledButton
               type="button"
@@ -95,7 +117,7 @@ const PassAuthentication: React.FC<IProps> = ({
               }}
               variant={VariantType.secondary}
             >
-              {<BsArrowLeft />} Atrás
+              <ButtonAlign>{<BsArrowLeft />}Atrás</ButtonAlign>
             </StyledButton>
           </ButtonContainer>
         </StyledForm>
