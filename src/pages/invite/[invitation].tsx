@@ -14,7 +14,7 @@ export interface entityTypes {
 }
 
 const Invitation = () => {
-  const [step, setStep] = useState(5)
+  const [step, setStep] = useState(1)
   const [entity, setEntity] = useState<entityTypes>({
     name: 'Uber',
     id: '1',
