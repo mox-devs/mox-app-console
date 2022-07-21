@@ -10,7 +10,6 @@ import { CenterWrapper } from '../login'
 const UserId: NextPage = () => {
   const router = useRouter()
   const { userId } = router.query
-  // ruta es /console/userId ejemplo usuario de id 1  /console/1
 
   const [loading, setLoading] = useState(true)
   const {

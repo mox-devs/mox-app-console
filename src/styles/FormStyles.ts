@@ -59,7 +59,7 @@ export const StyledForm = styled(Form)`
   flex-direction: column;
   align-items: center;
   border-radius: 20px;
-  width: 400px;
+  width: 450px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
   background: ${Palette.light};
 

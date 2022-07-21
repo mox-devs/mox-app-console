@@ -84,7 +84,7 @@ const UserDetail: React.FC<IProps> = ({ id }) => {
   const [user, setUser] = useState<UserListInfo>()
 
   useEffect(() => {
-    setUser(users.find(user => user.id === id))
+    setUser(users.find((user: { id: string }) => user.id === id))
   })
 
   return (

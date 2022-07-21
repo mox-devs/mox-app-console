@@ -518,7 +518,7 @@ const TermsConditions: React.FC<Iprops> = ({ setStep }) => {
               <StyledButton
                 type="button"
                 variant={VariantType.secondary}
-                onClick={() => setStep(2)}
+                onClick={() => setStep(3)}
               >
                 Atrás
               </StyledButton>

@@ -61,7 +61,7 @@ const RFC: React.FC<Iprops> = ({ setStep }) => {
         setFieldValue('workPlace', 'Mox')
         setStep(2)
         setLoading(false)
-      }, 2000)
+      }, 500)
       // const res = await axios.get('url')
       // if (res.status === 200) {
       //   const { data } = res

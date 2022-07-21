@@ -5,6 +5,7 @@ import RFC from './RFC'
 import TermsConditions from './TermsConditions'
 import Loader from './Loader'
 import { CenterWrapper } from '../pages/login'
+import ConfirmInformation from './ConfirmInformation'
 
 export interface userData {
   RFC: string
@@ -41,6 +42,7 @@ const OnBoardingForm: React.FC = () => {
   }
 
   const handleSubmit = (values: userData) => {
+    // request para enviar todos los datos al back y crear el usuario
     setLoading(true)
     console.log(values)
     setLoading(false)
@@ -63,7 +65,8 @@ const OnBoardingForm: React.FC = () => {
             <>
               {step === 1 && <RFC setStep={setStep} />}
               {step === 2 && <IneValidation setStep={setStep} />}
-              {step === 3 && <TermsConditions setStep={setStep} />}
+              {step === 3 && <ConfirmInformation setStep={setStep} />}
+              {step === 4 && <TermsConditions setStep={setStep} />}
             </>
           )}
         </>
