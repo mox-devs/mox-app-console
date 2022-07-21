@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Loader from '../../components/Loader'
+import UserDetail from '../../components/UserDetail'
 import { useUser } from '../../context/authContext'
 import SideBarLayout from '../../Layouts/SideBarLayout'
 import { CenterWrapper } from '../login'
@@ -32,7 +33,7 @@ const UserId: NextPage = () => {
     )
   return (
     <SideBarLayout>
-      <div>Usuario {userId}</div>
+      <UserDetail id={userId as string} />
     </SideBarLayout>
   )
 }

@@ -23,7 +23,7 @@ type formikFunctions = {
 }
 
 // ----- Mock Info -----
-const users: UserListInfo[] = [
+export const users: UserListInfo[] = [
   { id: '1', name: 'John Doe', rfc: 'JODO167846NL', entidad: 'Uber' },
   { id: '2', name: 'Xavier Doe', rfc: 'XADO167846NL', entidad: 'Deel' },
   { id: '3', name: 'Mike Hill', rfc: 'MIHIO167846NL', entidad: 'Uber' },
@@ -51,7 +51,7 @@ const Card = styled.div`
   background-color: #fff;
 `
 
-const List = styled.table`
+export const List = styled.table`
   border-collapse: collapse;
   width: 100%;
 
