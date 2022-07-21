@@ -5,10 +5,17 @@ import Image from 'next/image'
 import * as Yup from 'yup'
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
 import { StyledButton, VariantType } from '../styles/ButtonStyles'
-import { ErrorContainer, InputText, PasswordInput } from '../styles/FormStyles'
+import {
+  ButtonContainer,
+  ErrorContainer,
+  ImgContainer,
+  InputText,
+  Label,
+  PasswordInput,
+  StyledForm
+} from '../styles/FormStyles'
 import Modal from './Modal'
 import { Loader } from './Loader'
-import { StyledForm } from './RFC'
 import { entityTypes } from '../pages/invite/[invitation]'
 import RequestTwoFactor from './RequestTwoFactor'
 
@@ -21,17 +28,7 @@ interface externalData {
   password: string
   twoFactor: string
 }
-const ImgContainer = styled.div`
-  margin: 30px;
-`
-const Label = styled.label`
-  margin: 10px 0 10px;
-  font-weight: 700;
-  line-height: 19px;
-`
-const ButtonContainer = styled.div`
-  margin: 10px auto 20px;
-`
+
 const H1 = styled.h1`
   margin: 0px;
   font-size: 24px;

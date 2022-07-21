@@ -3,16 +3,17 @@ import { ErrorMessage, Formik } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 import Image from 'next/image'
-import { ErrorContainer, InputText } from '../styles/FormStyles'
-import { StyledButton, VariantType } from '../styles/ButtonStyles'
-import Swal from 'sweetalert2'
 import {
+  ErrorContainer,
+  InputText,
   ButtonContainer,
   ImgContainer,
   Label,
   StyledForm,
   TextContainer
-} from '../styles/FormLayoutStyles'
+} from '../styles/FormStyles'
+import { StyledButton, VariantType } from '../styles/ButtonStyles'
+import Swal from 'sweetalert2'
 
 // ----- Types -----
 

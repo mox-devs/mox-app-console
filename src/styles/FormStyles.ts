@@ -1,4 +1,4 @@
-import { Field } from 'formik'
+import { Field, Form } from 'formik'
 import styled from 'styled-components'
 import { Palette } from './ColorPalette'
 
@@ -53,4 +53,52 @@ export const ErrorContainer = styled.div`
   margin: 10px 0 0 0;
   font-size: 16px;
   color: ${Palette.danger};
+`
+export const StyledForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  width: 400px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+  background: ${Palette.light};
+
+  @media (max-width: 744px) {
+    width: 330px;
+  }
+`
+
+export const ImgContainer = styled.div`
+  margin: 30px 30px 20px;
+`
+
+export const Label = styled.label`
+  margin: 10px 0;
+  font-weight: 700;
+`
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  margin: 10px 0;
+
+  & button {
+    margin: 10px;
+  }
+`
+
+export const TextContainer = styled.div`
+  margin: 10px 30px 0;
+  font-weight: 300;
+  text-align: center;
+`
+
+export const CheckboxLabel = styled.label`
+  margin: 20px 0 0;
+  font-weight: 400;
+  font-size: 0.9rem;
+
+  &,
+  input {
+    cursor: pointer;
+  }
 `

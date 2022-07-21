@@ -225,16 +225,7 @@ export const LoginForm: React.FC = () => {
                 <ErrorMessage name="password" />
               </ErrorContainer>
 
-              <P
-                onClick={
-                  () => router.push('/password-recovery')
-                  /* Swal.fire({
-                    icon: 'info',
-                    title: 'Olvidaste tu contraseña',
-                    text: 'Por favor comuníquese con soporte para recuperar la contraseña'
-                  }) */
-                }
-              >
+              <P onClick={() => router.push('/password-recovery')}>
                 Olvide mi contraseña
               </P>
               <ButtonContainer>

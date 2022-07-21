@@ -2,17 +2,19 @@ import React, { useState } from 'react'
 import { Formik, ErrorMessage, Field } from 'formik'
 import * as Yup from 'yup'
 import Image from 'next/image'
-import { ErrorContainer, InputText, PasswordInput } from '../styles/FormStyles'
-import { StyledButton, VariantType } from '../styles/ButtonStyles'
-import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
-import { useRouter } from 'next/router'
 import {
+  ErrorContainer,
+  InputText,
+  PasswordInput,
   ButtonContainer,
   ImgContainer,
   Label,
   StyledForm,
   TextContainer
-} from '../styles/FormLayoutStyles'
+} from '../styles/FormStyles'
+import { StyledButton, VariantType } from '../styles/ButtonStyles'
+import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
+import { useRouter } from 'next/router'
 import Swal from 'sweetalert2'
 
 // ----- Types -----

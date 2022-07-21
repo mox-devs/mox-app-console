@@ -4,13 +4,17 @@ import styled from 'styled-components'
 import Palette from '../styles/ColorPalette'
 import * as Yup from 'yup'
 import Image from 'next/image'
-import { ErrorContainer } from '../styles/FormStyles'
+import {
+  ButtonContainer,
+  ErrorContainer,
+  ImgContainer,
+  StyledForm
+} from '../styles/FormStyles'
 import { StyledButton, VariantType } from '../styles/ButtonStyles'
 import Loader from './Loader'
 import Deel from '../images/Deel_Logo.jpg'
 import Uber from '../images/Uber_logo.png'
 import { useRouter } from 'next/router'
-import { StyledForm } from './RFC'
 import { entityTypes } from '../pages/invite/[invitation]'
 // ----- Types & Interfaces -----
 type EntityData = {
@@ -27,9 +31,6 @@ interface StyleProps {
 }
 // ----- Styles -----
 
-const ImgContainer = styled.div`
-  margin: 30px;
-`
 const H1 = styled.h1`
   font-size: 20px;
   text-align: center;
@@ -59,9 +60,6 @@ const Label = styled.label`
   & input {
     display: none;
   }
-`
-const ButtonContainer = styled.div`
-  margin: 10px auto 20px;
 `
 
 // ----- Component Logic -----

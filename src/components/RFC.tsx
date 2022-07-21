@@ -1,13 +1,20 @@
 import React, { useState } from 'react'
-import { Formik, Form, Field } from 'formik'
-import styled from 'styled-components'
-import Palette from '../styles/ColorPalette'
+import { Formik, Field, useFormikContext, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import { InputText } from '../styles/FormStyles'
+import {
+  ButtonContainer,
+  CheckboxLabel,
+  ErrorContainer,
+  ImgContainer,
+  InputText,
+  Label,
+  StyledForm
+} from '../styles/FormStyles'
 import Image from 'next/image'
 import { StyledButton, VariantType } from '../styles/ButtonStyles'
 import Swal from 'sweetalert2'
 import Loader from './Loader'
+import { userData } from './OnBoardingForm'
 
 // ----- Types & Interfaces -----
 type RfcData = {
@@ -19,75 +26,65 @@ interface Iprops {
   setStep: React.Dispatch<React.SetStateAction<number>>
 }
 
-// ----- Styles -----
-export const StyledForm = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 20px;
-  width: 400px;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
-  background: ${Palette.light};
-
-  @media (max-width: 744px) {
-    width: 330px;
-  }
-`
-
-const ImgContainer = styled.div`
-  margin: 30px;
-`
-
-const Label = styled.label`
-  margin: 10px 0 10px;
-  font-weight: 700;
-  line-height: 19px;
-`
-
-const CheckboxLabel = styled.label`
-  margin: 30px 0;
-  font-weight: 400;
-  font-size: 0.9rem;
-
-  &,
-  input {
-    cursor: pointer;
-  }
-`
-
-const ButtonContainer = styled.div`
-  margin: 10px auto 20px;
-`
-
 // ----- Component Logic -----
 
 const RFC: React.FC<Iprops> = ({ setStep }) => {
   const [loading, setLoading] = useState(false)
+  const { setFieldValue, values } = useFormikContext()
+
+  const userData: userData = values as userData
 
   const initialValues: RfcData = {
-    rfc: '',
-    terms: false
-  }
-
-  const handleSubmit = (values: RfcData) => {
-    setLoading(true)
-    if (values.rfc === '1234') {
-      setStep(2)
-    } else {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Su RFC no se encuentra asociada a esta empresa',
-        text: 'Disculpe las molestias.'
-      })
-    }
-
-    setLoading(false)
+    rfc: userData.RFC || '',
+    terms: userData.termsConditions || false
   }
 
   const validationSchema = Yup.object({
     rfc: Yup.string().required('Obligatorio'),
     terms: Yup.bool().oneOf([true], 'Obligatorio')
   })
+
+  const handleSubmit = async (values: RfcData) => {
+    setLoading(true)
+    const { rfc, terms } = values
+    // consultar datos del rfc para traer los datos
+    // simula la petición de axios
+    try {
+      if (rfc === '1234') throw new Error('algo salio mal')
+      setTimeout(() => {
+        setFieldValue('RFC', rfc)
+        setFieldValue('termsConditions', terms)
+        setFieldValue('name', 'Cesar Javier')
+        setFieldValue('lastName', 'Ortiz Montero')
+        setFieldValue('salaryAmount', '500')
+        setFieldValue('paidPeriod', '2')
+        setFieldValue('workPlace', 'Mox')
+        setStep(2)
+        setLoading(false)
+      }, 2000)
+      // const res = await axios.get('url')
+      // if (res.status === 200) {
+      //   const { data } = res
+      //   setFieldValue('RFC', rfc)
+      //   setFieldValue('termsConditions', terms)
+      //   setFieldValue('name', data.name)
+      //   setFieldValue('lastName', data.lastName)
+      //   setFieldValue('salaryAmount', data.salaryAmount)
+      //   setFieldValue('paidPeriod', data.paidPeriod)
+      //   setFieldValue('workPlace', data.workPlace)
+      // }
+      // setLoading(false)
+      // setStep(2)
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
+      Swal.fire({
+        icon: 'warning',
+        title: 'Su RFC no se encuentra',
+        text: 'Inténtelo mas tarde '
+      })
+    }
+  }
 
   return (
     <Formik
@@ -97,7 +94,7 @@ const RFC: React.FC<Iprops> = ({ setStep }) => {
         handleSubmit(values)
       }}
     >
-      {({ values, handleChange }) => (
+      {() => (
         <StyledForm method="POST">
           <ImgContainer>
             <Image
@@ -114,22 +111,22 @@ const RFC: React.FC<Iprops> = ({ setStep }) => {
             </ButtonContainer>
           ) : (
             <>
-              <Label htmlFor="rfc">Ingrese su clave RFC</Label>
-              <InputText
-                id="rfc"
-                name="rfc"
-                value={values.rfc}
-                onChange={handleChange}
-              />
+              <Label htmlFor="rfc">Ingrese su numero RFC</Label>
+              <InputText id="rfc" name="rfc" />
+
+              <ErrorContainer>
+                <ErrorMessage name="rfc" />
+              </ErrorContainer>
+
               <CheckboxLabel htmlFor="terms">
-                <Field
-                  id="terms"
-                  name="terms"
-                  type="checkbox"
-                  onChange={handleChange}
-                />
+                <Field id="terms" name="terms" type="checkbox" />
                 Acepto los <strong>términos y condiciones</strong>
               </CheckboxLabel>
+
+              <ErrorContainer>
+                <ErrorMessage name="terms" />
+              </ErrorContainer>
+
               <ButtonContainer>
                 <StyledButton type="submit" variant={VariantType.primary}>
                   Continuar

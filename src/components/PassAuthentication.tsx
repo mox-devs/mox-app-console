@@ -7,9 +7,9 @@ import {
   ImgContainer,
   Label,
   StyledForm,
-  TextContainer
-} from '../styles/FormLayoutStyles'
-import { InputText } from '../styles/FormStyles'
+  TextContainer,
+  InputText
+} from '../styles/FormStyles'
 import * as Yup from 'yup'
 import AutoSubmitToken from './AutoSubmitToken'
 import Swal from 'sweetalert2'
